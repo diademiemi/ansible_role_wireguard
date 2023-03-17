@@ -1,0 +1,41 @@
+[Interface]
+Address = {{ wireguard_ip }}
+{% if wireguard_master_inventory_hostname == inventory_hostname %}
+ListenPort = {{ wireguard_port }}
+{% endif %}
+PrivateKey = {{ wireguard_private_key }}
+{% if wireguard_iptables_forward %}
+PostUp = iptables -A FORWARD -i {{ wireguard_interface_name }} -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ wireguard_physical_interface }} -j MASQUERADE
+PostDown = iptables -D FORWARD -i {{ wireguard_interface_name }} -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ wireguard_physical_interface }} -j MASQUERADE
+{% endif %}
+
+{% if wireguard_master_inventory_hostname == inventory_hostname %}{# For the master host #}
+{% for host in ansible_play_hosts %}{# Include hosts in this play that mention this host as master #}
+{% if host != inventory_hostname %}
+{% if hostvars[host].wireguard_master_inventory_hostname is defined and hostvars[host].wireguard_master_inventory_hostname != "" %}
+{% if hostvars[host].wireguard_master_inventory_hostname == inventory_hostname %}
+[Peer] # {{ hostvars[host].ansible_hostname }}
+PublicKey = {{ hostvars[host].wireguard_public_key }}
+AllowedIPs = {% if hostvars[host].wireguard_allowed_ips is defined %}{{ hostvars[host].wireguard_allowed_ips }}{% else %}{{ wireguard_allowed_ips }}{% endif %}{% if hostvars[host].wireguard_additional_allowed_ips is defined %},{{ hostvars[host].wireguard_additional_allowed_ips }}{% endif %}
+
+PersistentKeepalive = 25
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+
+{% for peer in wireguard_additional_peers %}
+[Peer] # {{ peer.name }}
+PublicKey = {{ peer.public_key }}
+AllowedIPs = {{ peer.allowed_ips }}
+PersistentKeepalive = 25
+{% endfor %}
+{% else %}{# For a peer #}
+[Peer]
+PublicKey = {{ hostvars[wireguard_master_inventory_hostname].wireguard_public_key }}
+AllowedIPs = {{ wireguard_allowed_ips }}
+PersistentKeepalive = 25
+Endpoint = {{ hostvars[wireguard_master_inventory_hostname].ansible_default_ipv4.address }}:{{ wireguard_port }}
+{% endif %}
+
+

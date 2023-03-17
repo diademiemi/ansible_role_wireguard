@@ -1,0 +1,11 @@
+---
+- name: "Install Wireguard"
+  become: true
+  ansible.builtin.apt:
+    name: "{{ wireguard_packages }}"
+    state: present
+    update_cache: true
+
+- name: "Setup | Import common tasks"
+  ansible.builtin.include_tasks: common/setup.yml
+...
