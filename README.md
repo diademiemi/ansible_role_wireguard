@@ -11,7 +11,7 @@ You can use this just to connect to an existing host by omitting the `wireguard_
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `wireguard_master_inventory_hostname` | `""` | The inventory hostname of the master node. |
-| `wireguard_master_ip` | `"{{ hostvars[wireguard_master_inventory_hostname].ansible_default_ipv4.address }}"` | The IP address of the master node. |
+| `wireguard_master_ip` | IP of master | The IP address of the master node. |
 | `wireguard_port` | `51820` | The port to use for Wireguard. |
 | `wireguard_interface_name` | `"wg0"` | The name of the Wireguard interface. |
 | `wireguard_private_key` | `""` | The private key to use for the Wireguard interface. Will be generated if not set. |
