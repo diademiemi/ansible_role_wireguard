@@ -1,12 +1,4 @@
 ---
-- name: "Reboot host"
-  become: true
-  ansible.builtin.reboot:
-    reboot_timeout: 600
-    test_command: /usr/bin/true
-    pre_reboot_delay: 5
-    post_reboot_delay: 5
-
 - name: Restart wireguard
   become: true
   ansible.builtin.service:
