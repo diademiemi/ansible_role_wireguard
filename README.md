@@ -2,10 +2,12 @@ Ansible Role Wireguard
 =========
 
 [![Molecule Test](https://github.com/diademiemi/ansible_role_wireguard/actions/workflows/molecule.yml/badge.svg)](https://github.com/diademiemi/ansible_role_wireguard/actions/workflows/molecule.yml)
-Ansible role to install and configure a Wireguard network. It can generate keys or use existing ones to connect to externally configured peers.   
 
-It will automatically use all hosts in the play as peers connectng to the given master node. An additional list of peers can be added to the Wireguard interface with the `wireguard_additional_peers` variable.  
-You can use this just to connect to an existing host by omitting the `wireguard_master_inventory_hostname` variable and using the `wireguard_additional_peers` variable.  
+Ansible role to install and configure a Wireguard network. It can generate keys or use existing ones to connect to externally configured peers.  
+
+It will automatically use all hosts in the play as peers connecting to the given master node (`wireguard_master_inventory_hostname`). An additional list of peers can be added to the Wireguard interface with the `wireguard_additional_peers` variable.  
+
+You can use this just to connect to an existing host by omitting the `wireguard_master_inventory_hostname` variable and just using the `wireguard_additional_peers` variable.  
 
 
 Requirements
@@ -19,7 +21,8 @@ These platforms are supported:
 - EL 9 (Tested on Rocky Linux 9)  
 - Fedora 38  
 
-- Port 51820/UDP must be open on the master host.  
+Networking requirements:  
+- Port 51820/UDP (or `wireguard_port`) must be accessible on the master host.  
 
 Role Variables
 --------------
