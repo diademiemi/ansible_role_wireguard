@@ -1,4 +1,4 @@
 ---
-wireguard_master_inventory_hostname: debian10
+wireguard_master_inventory_hostname: ubuntu2004
 
 ...
