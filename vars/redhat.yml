@@ -1,4 +1,7 @@
 ---
 _wireguard_packages:
   - wireguard-tools
+  - iptables
+  - iproute
+
 ...
