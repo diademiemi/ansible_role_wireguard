@@ -1,4 +1,6 @@
 ---
+wireguard_hosts: "{{ ansible_play_hosts_all }}" # List of Ansible inventory hosts in this play to configure as Syncthing peers
+
 wireguard_master_inventory_hostname: ""
 wireguard_master_ip: "{{ hostvars[wireguard_master_inventory_hostname].ansible_default_ipv4.address }}"
 wireguard_port: 51820
@@ -10,17 +12,7 @@ wireguard_ip: "192.168.150.1/24" # or {{ wireguard_subnet | ipaddr('net') | ipad
 wireguard_iptables_forward: false
 wireguard_physical_interface: "eth0"
 
-_wireguard_packages:
-  opensuse microos:
-    - wireguard-tools
-  debian:
-    - wireguard-tools
-  ubuntu:
-    - wireguard-tools
-  redhat:
-    - wireguard-tools
-
-wireguard_packages: "{{ _wireguard_packages[ansible_distribution | lower] | default(_wireguard_packages[ansible_os_family | lower]) | default([]) }}"
+wireguard_packages: "{{ _wireguard_packages | default([]) }}"
 
 wireguard_additional_peers: []
 # - name: "otherhost"

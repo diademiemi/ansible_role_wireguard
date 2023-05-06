@@ -1,0 +1,12 @@
+---
+- name: "Add buster backports repository"
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "deb http://deb.debian.org/debian buster-backports main"
+    state: present
+    update_cache: true
+    filename: "buster-backports"
+
+- name: "Include Debian tasks"
+  ansible.builtin.include_tasks: "setup/debian.yml"
+...

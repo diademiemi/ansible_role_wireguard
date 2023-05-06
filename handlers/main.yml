@@ -7,4 +7,12 @@
     pre_reboot_delay: 5
     post_reboot_delay: 5
 
+- name: Restart wireguard
+  become: true
+  ansible.builtin.service:
+    name: 'wg-quick@{{ wireguard_interface_name }}'
+    state: "restarted"
+    enabled: true
+  changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags" # Rotating keys
+
 ...

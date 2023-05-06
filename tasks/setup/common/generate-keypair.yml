@@ -1,28 +1,31 @@
 ---
-- name: "Setup | Generate private"
+- name: Generate private
   ansible.builtin.shell: |
     wg genkey
   register: wireguard_private_key_output
   when: wireguard_private_key is not defined
   changed_when: false
 
-- name: "Setup | Set variable to plain value"
+- name: Set variable to plain value # noqa no-handler
   ansible.builtin.set_fact:
     wireguard_private_key: "{{ wireguard_private_key_output.stdout_lines[0] }}"
-  when: wireguard_private_key_output.changed
+  when: wireguard_private_key_output is not skipped
   changed_when: false
 
-- name: "Setup | Generate public"
+- name: Generate public # noqa no-handler
   ansible.builtin.shell: |
+    set -o pipefail
     echo {{ wireguard_private_key }} | wg pubkey
+  args:
+    executable: /bin/bash
   register: wireguard_public_key_output
   when: wireguard_public_key is not defined
   changed_when: false
 
-- name: "Setup | Set variable to plain value"
+- name: Set variable to plain value # noqa no-handler
   ansible.builtin.set_fact:
     wireguard_public_key: "{{ wireguard_public_key_output.stdout_lines[0] }}"
-  when: wireguard_public_key_output.changed
+  when: wireguard_private_key_output is not skipped
   changed_when: false
 
 ...

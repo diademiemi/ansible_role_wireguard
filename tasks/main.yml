@@ -1,20 +1,55 @@
 ---
-- name: "Main | include setup specific tasks"
-  ansible.builtin.set_fact:
-    _wireguard_agent_setup_file: "{{ lookup('ansible.builtin.first_found', find_plays) }}"
-  vars:
-    find_plays:
-      files:
-        - "{{ ansible_facts.distribution | lower }}-{{ ansible_facts.distribution_version | lower }}.yml"
-        - "{{ ansible_facts.distribution | lower }}-{{ ansible_facts.distribution_major_version | lower }}.yml"
-        - "{{ ansible_facts.distribution | lower }}.yml"
-        - "{{ ansible_facts.os_family | lower }}.yml"
-        - "{{ ansible_facts.system | lower }}.yml"
-        - "main.yml"
-      paths:
-        - "setup"
+# Ensure distribution facts are gathered
+- name: "Main | Ensure ansible_facts used by role"
+  ansible.builtin.setup:
+    gather_subset: min
 
-- name: "Main | include tasks for wireguard"
-  ansible.builtin.include_tasks: "{{ _wireguard_agent_setup_file }}"
-  when: _wireguard_agent_setup_file is defined
+# Set variables for this platform
+- name: "Main | Set platform/version specific variables"
+  ansible.builtin.include_vars: "{{ lookup('ansible.builtin.first_found', find_vars) }}"
+  vars:
+    find_vars:
+      files: "{{ __role_task_search_order }}"
+      skip: true
+      paths:
+        - "vars"
+
+# Assert variables are set correctly for this platform
+- name: "Main | Assert platform/version specific variables"
+  ansible.builtin.include_tasks: "{{ lookup('ansible.builtin.first_found', find_asserts) }}"
+  vars:
+    find_asserts:
+      files: "{{ __role_task_search_order }}"
+      skip: true
+      paths:
+        - "assert"
+
+# Run tasks specific to this platform
+- name: "Main | platform/version specific playbooks"
+  ansible.builtin.include_tasks: "{{ __role_found_tasks }}"
+  vars:
+    __role_find_tasks:
+      files: "{{ __role_task_search_order }}"
+      skip: true
+      paths: ["tasks/{{ __role_action_task }}"]
+    __role_found_tasks: "{{ lookup('ansible.builtin.first_found', __role_find_tasks) }}"
+  when: __role_found_tasks | length > 0
+  loop: "{{ [__role_action | default('setup')] | flatten }}"
+  loop_control:
+    loop_var: __role_action_task
+
+# This is sometimes can be used when the same tasks must be ran on every host in parallel
+- name: "Main | tasks that always run"
+  ansible.builtin.include_tasks: "{{ __role_found_tasks }}"
+  vars:
+    __role_find_tasks:
+      files: ["always.yml"]
+      skip: true
+      paths: ["tasks/{{ __role_action_task }}"]
+    __role_found_tasks: "{{ lookup('ansible.builtin.first_found', __role_find_tasks) }}"
+  when: __role_found_tasks | length > 0
+  loop: "{{ [__role_action | default('setup')] | flatten }}"
+  loop_control:
+    loop_var: __role_action_task
+
 ...

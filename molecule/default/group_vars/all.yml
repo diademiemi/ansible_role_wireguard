@@ -1,0 +1,4 @@
+---
+wireguard_master_inventory_hostname: debian10
+
+...

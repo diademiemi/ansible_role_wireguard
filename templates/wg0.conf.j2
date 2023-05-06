@@ -10,7 +10,7 @@ PostDown = iptables -D FORWARD -i {{ wireguard_interface_name }} -j ACCEPT; ipta
 {% endif %}
 
 {% if wireguard_master_inventory_hostname == inventory_hostname %}{# For the master host #}
-{% for host in ansible_play_hosts %}{# Include hosts in this play that mention this host as master #}
+{% for host in wireguard_hosts %}{# Include hosts in this play that mention this host as master #}
 {% if host != inventory_hostname %}
 {% if hostvars[host].wireguard_master_inventory_hostname is defined and hostvars[host].wireguard_master_inventory_hostname != "" %}
 {% if hostvars[host].wireguard_master_inventory_hostname == inventory_hostname %}

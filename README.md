@@ -1,13 +1,29 @@
-# Wireguard
+Ansible Role Wireguard
+=========
+
+[![Molecule Test](https://github.com/diademiemi/ansible_role_wireguard/actions/workflows/molecule.yml/badge.svg)](https://github.com/diademiemi/ansible_role_wireguard/actions/workflows/molecule.yml)
 Ansible role to install and configure a Wireguard network. It can generate keys or use existing ones to connect to externally configured peers.   
 
 It will automatically use all hosts in the play as peers connectng to the given master node. An additional list of peers can be added to the Wireguard interface with the `wireguard_additional_peers` variable.  
 You can use this just to connect to an existing host by omitting the `wireguard_master_inventory_hostname` variable and using the `wireguard_additional_peers` variable.  
 
-## Requirements
-- Port 51820/UDP must be open on the master.
 
-## Variables
+Requirements
+------------
+These platforms are supported:
+- Ubuntu 20.04  
+- Ubuntu 22.04  
+- Debian 10  
+- Debian 11  
+- EL 8 (Tested on Rocky Linux 8)  
+- EL 9 (Tested on Rocky Linux 9)  
+- Fedora 38  
+
+- Port 51820/UDP must be open on the master host.  
+
+Role Variables
+--------------
+
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `wireguard_master_inventory_hostname` | `""` | The inventory hostname of the master node. |
@@ -20,3 +36,42 @@ You can use this just to connect to an existing host by omitting the `wireguard_
 | `wireguard_iptables_forward` | `true` | Whether to enable iptables forwarding. |
 | `wireguard_physical_interface` | `""` | The physical interface to forward to |
 | `wireguard_additional_peers` | `[]` | A list of additional peers to add to the Wireguard interface. |
+
+Dependencies
+------------
+<!-- List dependencies on other roles or criteria -->
+None
+
+Example Playbook
+----------------
+
+```yaml
+- name: Use template role
+  hosts: "{{ target | default('template') }}"
+  roles:
+    - diademiemi.wireguard
+```
+
+License
+-------
+
+MIT
+
+Author Information
+------------------
+
+- diademiemi (@diademiemi)
+
+Role Testing
+------------
+
+This repository comes with Molecule tests for Docker on the supported platforms.
+Install Molecule by running
+```bash
+pip3 install -r requirements.txt
+```
+
+Run the tests with
+```bash
+molecule test
+```

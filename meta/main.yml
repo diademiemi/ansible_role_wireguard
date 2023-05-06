@@ -1,5 +1,7 @@
 galaxy_info:
   author: diademiemi
+  namespace: diademiemi
+  company: diademiemi
   description: Ansible role to install and configure a wireguard network
   role_name: wireguard
 

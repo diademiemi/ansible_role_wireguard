@@ -1,3 +1,0 @@
-skip_list:  # or 'skip_list' to silence them completely
-  - no-handler  # meta/main.yml should contain relevant info.
-  - meta-no-info  # meta/main.yml should contain relevant info.
