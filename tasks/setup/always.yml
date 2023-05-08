@@ -33,7 +33,8 @@
     group: root
     mode: '0600'
   notify: Restart wireguard
-  changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags" # Rotating keys
+  register: wireguard_conf
+  changed_when: "wireguard_conf is changed and 'molecule-idempotence-notest' not in ansible_skip_tags" # Rotating keys
 
 - name: Set necessary sysctl values
   become: true
