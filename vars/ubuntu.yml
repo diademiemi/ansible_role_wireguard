@@ -1,4 +1,5 @@
 ---
 _wireguard_packages:
   - wireguard-tools
+
 ...
