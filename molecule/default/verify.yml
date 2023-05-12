@@ -5,8 +5,14 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Example assertion
-      ansible.builtin.assert:
-        that: true
+    - name: Check if /etc/wg-quick/wg0.conf exists
+      ansible.builtin.stat:
+        path: /etc/wg-quick/wg0.conf
+      register: wg0_conf
+
+    - name: Fail if /etc/wg-quick/wg0.conf does not exist
+      ansible.builtin.fail:
+        msg: "wg0.conf does not exist"
+      when: not wg0_conf.stat.exists
 
 ...
