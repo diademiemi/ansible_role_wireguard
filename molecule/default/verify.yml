@@ -5,12 +5,12 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Check if /etc/wg-quick/wg0.conf exists
+    - name: Check if /etc/wireguard/wg0.conf exists
       ansible.builtin.stat:
-        path: /etc/wg-quick/wg0.conf
+        path: /etc/wireguard/wg0.conf
       register: wg0_conf
 
-    - name: Fail if /etc/wg-quick/wg0.conf does not exist
+    - name: Fail if /etc/wireguard/wg0.conf does not exist
       ansible.builtin.fail:
         msg: "wg0.conf does not exist"
       when: not wg0_conf.stat.exists
