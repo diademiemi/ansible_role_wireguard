@@ -37,5 +37,3 @@ AllowedIPs = {{ wireguard_allowed_ips }}
 PersistentKeepalive = 25
 Endpoint = {{ hostvars[wireguard_master_inventory_hostname].ansible_default_ipv4.address }}:{{ wireguard_port }}
 {% endif %}
-
-
