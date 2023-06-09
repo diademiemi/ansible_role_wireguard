@@ -49,10 +49,11 @@ Example Playbook
 ----------------
 
 ```yaml
-- name: Use template role
-  hosts: "{{ target | default('template') }}"
+- name: Use diademiemi.wireguard role
+  hosts: "{{ target | default('wireguard') }}"
   roles:
-    - diademiemi.wireguard
+    - role: "diademiemi.wireguard"
+      tags: ['diademiemi', 'wireguard', 'setup']
 ```
 
 License
