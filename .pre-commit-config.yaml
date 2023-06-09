@@ -1,14 +1,5 @@
 ---
 repos:
-  - repo: local
-    hooks:
-      - id: pip-requirements
-        name: install pip requirements
-        entry: pip3 install -r requirements.txt
-        language: system
-        always_run: true
-        pass_filenames: false
-
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
@@ -34,5 +25,6 @@ repos:
     hooks:
       - id: ansible-lint
         files: \.(yaml|yml)$
+        entry: sh -c 'python3 -m pip install -r requirements.txt; python3 -m ansiblelint -v --force-color'
 
 ...
