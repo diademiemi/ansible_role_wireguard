@@ -1,0 +1,8 @@
+---
+- name: Install Wireguard
+  become: true
+  ansible.builtin.yum:
+    name: "{{ wireguard_packages }}"
+    state: present
+
+...

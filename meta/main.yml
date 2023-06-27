@@ -18,7 +18,7 @@ galaxy_info:
   # - CC-BY-4.0
   license: MIT
 
-  min_ansible_version: "2.1"
+  min_ansible_version: "2.11"
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:
@@ -29,17 +29,29 @@ galaxy_info:
   # To view available platforms and versions (or releases), visit:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
-  # platforms:
-  # - name: Fedora
-  #   versions:
-  #   - all
-  #   - 25
-  # - name: SomePlatform
-  #   versions:
-  #   - all
-  #   - 1.0
-  #   - 7
-  #   - 99.99
+
+  platforms:
+    - name: "EL"
+      versions:
+        - "8"
+        - "9"
+    - name: "Fedora"
+      versions:
+        - "38"
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+    - name: Debian
+      versions:
+        - buster
+        - bullseye
+    - name: opensuse
+      versions:
+        - "15.4"
+    - name: opensuse
+      versions:
+        - "15.4"
 
   galaxy_tags:
     - wireguard

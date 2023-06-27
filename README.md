@@ -20,6 +20,7 @@ These platforms are supported:
 - EL 8 (Tested on Rocky Linux 8)  
 - EL 9 (Tested on Rocky Linux 9)  
 - Fedora 38  
+- openSUSE Leap 15.4
 
 Networking requirements:  
 - Port 51820/UDP (or `wireguard_port`) must be accessible on the master host.  
