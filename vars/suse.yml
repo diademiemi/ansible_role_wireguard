@@ -1,5 +1,6 @@
 ---
 _wireguard_packages:
   - wireguard-tools
+  - iproute2
 
 ...
