@@ -1,7 +1,7 @@
 ---
 - name: Install Wireguard
   become: true
-  ansible.builtin.yum:
+  community.general.zypper:
     name: "{{ wireguard_packages }}"
     state: present
 
