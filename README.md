@@ -13,13 +13,13 @@ You can use this just to connect to an existing host by omitting the `wireguard_
 Requirements
 ------------
 These platforms are supported:
-- Ubuntu 20.04  
-- Ubuntu 22.04  
-- Debian 10  
-- Debian 11  
-- EL 8 (Tested on Rocky Linux 8)  
-- EL 9 (Tested on Rocky Linux 9)  
-- Fedora 38  
+- Ubuntu 20.04
+- Ubuntu 22.04
+- Debian 10
+- Debian 11
+- EL 8 (Tested on Rocky Linux 8)
+- EL 9 (Tested on Rocky Linux 9)
+- Fedora 38
 - openSUSE Leap 15.4
 
 Networking requirements:  
