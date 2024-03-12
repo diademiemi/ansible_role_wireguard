@@ -9,7 +9,6 @@ platforms:
     pre_build_image: true
     systemd: true
     tmpfs:
-     - /tmp
      - /run
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -21,7 +20,6 @@ platforms:
     pre_build_image: true
     systemd: true
     tmpfs:
-     - /tmp
      - /run
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -33,7 +31,6 @@ platforms:
     pre_build_image: true
     systemd: true
     tmpfs:
-     - /tmp
      - /run
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -45,7 +42,6 @@ platforms:
     pre_build_image: true
     systemd: true
     tmpfs:
-     - /tmp
      - /run
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -57,7 +53,6 @@ platforms:
     pre_build_image: true
     systemd: true
     tmpfs:
-     - /tmp
      - /run
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -69,7 +64,6 @@ platforms:
     pre_build_image: true
     systemd: true
     tmpfs:
-     - /tmp
      - /run
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -81,7 +75,6 @@ platforms:
     pre_build_image: true
     systemd: true
     tmpfs:
-     - /tmp
      - /run
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -93,7 +86,6 @@ platforms:
     pre_build_image: true
     systemd: true
     tmpfs:
-     - /tmp
      - /run
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -105,7 +97,6 @@ platforms:
     pre_build_image: true
     systemd: true
     tmpfs:
-     - /tmp
      - /run
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
