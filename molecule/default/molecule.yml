@@ -7,10 +7,7 @@ platforms:
   - name: ubuntu2004
     image: docker.io/geerlingguy/docker-ubuntu2004-ansible
     pre_build_image: true
-    systemd: true
-    tmpfs:
-     - /tmp
-     - /run
+    systemd: always
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     cgroupns_mode: host
@@ -19,7 +16,7 @@ platforms:
   - name: ubuntu2204
     image: docker.io/geerlingguy/docker-ubuntu2204-ansible
     pre_build_image: true
-    systemd: true
+    systemd: always
     tmpfs:
      - /tmp
      - /run
@@ -31,7 +28,7 @@ platforms:
   - name: debian10
     image: docker.io/geerlingguy/docker-debian10-ansible
     pre_build_image: true
-    systemd: true
+    systemd: always
     tmpfs:
      - /tmp
      - /run
@@ -43,7 +40,7 @@ platforms:
   - name: debian11
     image: docker.io/geerlingguy/docker-debian11-ansible
     pre_build_image: true
-    systemd: true
+    systemd: always
     tmpfs:
      - /tmp
      - /run
@@ -55,7 +52,7 @@ platforms:
   - name: debian12
     image: docker.io/geerlingguy/docker-debian12-ansible
     pre_build_image: true
-    systemd: true
+    systemd: always
     tmpfs:
      - /tmp
      - /run
@@ -67,7 +64,7 @@ platforms:
   - name: el8
     image: docker.io/geerlingguy/docker-rockylinux8-ansible
     pre_build_image: true
-    systemd: true
+    systemd: always
     tmpfs:
      - /tmp
      - /run
@@ -79,7 +76,7 @@ platforms:
   - name: el9
     image: docker.io/geerlingguy/docker-rockylinux9-ansible
     pre_build_image: true
-    systemd: true
+    systemd: always
     tmpfs:
      - /tmp
      - /run
@@ -91,7 +88,7 @@ platforms:
   - name: fedora38
     image: docker.io/geerlingguy/docker-fedora38-ansible
     pre_build_image: true
-    systemd: true
+    systemd: always
     tmpfs:
      - /tmp
      - /run
@@ -103,7 +100,7 @@ platforms:
   - name: opensuse15
     image: docker.io/geerlingguy/docker-opensuseleap15-ansible
     pre_build_image: true
-    systemd: true
+    systemd: always
     tmpfs:
      - /tmp
      - /run
